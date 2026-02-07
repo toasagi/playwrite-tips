@@ -1,15 +1,17 @@
 {
-  "name": "playwright-fixtures-sample",
-  "version": "1.0.0",
-  "description": "Playwright Fixtures サンプル - ユーザーごとのプロファイル検証",
+  "name": "playwright-bdd-pom-sample",
+  "version": "2.0.0",
+  "description": "Playwright BDD + Page Object Model sample - User profile verification",
   "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed",
-    "test:ui": "npx playwright test --ui"
+    "test": "npx bddgen && npx playwright test",
+    "test:headed": "npx bddgen && npx playwright test --headed",
+    "test:ui": "npx bddgen && npx playwright test --ui",
+    "bddgen": "npx bddgen"
   },
   "devDependencies": {
     "@playwright/test": "^1.50.0",
     "@types/node": "^22.0.0",
+    "playwright-bdd": "^8.4.2",
     "typescript": "^5.7.0"
   }
 }
