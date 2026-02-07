@@ -132,6 +132,10 @@ export default defineConfig({
 ```json
 {
   "username": "yamada",
+  "login": {
+    "username": "demo",
+    "password": "Demo@2025!"
+  },
   "profile": {
     "displayName": "山田太郎",
     "phone": "090-1234-5678",
@@ -145,6 +149,10 @@ export default defineConfig({
 ```json
 {
   "username": "sato",
+  "login": {
+    "username": "user1",
+    "password": "User1@2025!"
+  },
   "profile": {
     "displayName": "佐藤花子",
     "phone": "080-9876-5432",
@@ -158,6 +166,10 @@ export default defineConfig({
 ```json
 {
   "username": "tanaka",
+  "login": {
+    "username": "user2",
+    "password": "User2@2025!"
+  },
   "profile": {
     "displayName": "田中一郎",
     "phone": "070-1111-2222",
@@ -182,6 +194,10 @@ export type UserProfile = {
 
 export type UserData = {
   username: string;
+  login: {
+    username: string;
+    password: string;
+  };
   profile: UserProfile;
 };
 
@@ -211,9 +227,9 @@ async function loginAndSetupProfile(page: Page, userData: UserData): Promise<voi
   
   // 3. Enter login credentials in dialog
   const loginDialog = page.getByRole('dialog', { name: 'ログイン' });
-  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill('demo');
-  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill('Demo@2025!');
-  
+  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill(userData.login.username);
+  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill(userData.login.password);
+
   // 4. Click login button in dialog (submit button)
   await loginDialog.getByRole('button', { name: 'ログイン' }).click();
   
@@ -402,6 +418,10 @@ const BASE_URL = 'https://toasagi.github.io/shoptodo-app';
 // User data type definitions
 type UserData = {
   username: string;
+  login: {
+    username: string;
+    password: string;
+  };
   profile: {
     displayName: string;
     phone: string;
@@ -428,18 +448,18 @@ async function loginAndSetupProfile(page: Page, userData: UserData): Promise<voi
   await page.locator('#login-btn').click();
   
   const loginDialog = page.getByRole('dialog', { name: 'ログイン' });
-  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill('demo');
-  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill('Demo@2025!');
+  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill(userData.login.username);
+  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill(userData.login.password);
   await loginDialog.getByRole('button', { name: 'ログイン' }).click();
-  
+
   await loginDialog.waitFor({ state: 'hidden' });
-  
+
   await page.getByRole('link', { name: 'プロフィール' }).click();
   await page.waitForURL('**/user-profile.html');
-  
+
   const nameInput = page.getByRole('textbox', { name: '名前' });
   await nameInput.waitFor({ state: 'visible' });
-  
+
   await nameInput.fill(userData.profile.displayName);
   await page.getByRole('textbox', { name: '電話番号' }).fill(userData.profile.phone);
   await page.getByRole('combobox', { name: 'お支払い方法' }).selectOption(userData.profile.paymentMethod);
@@ -504,9 +524,8 @@ npm run test:headed
 
 This sample combines features introduced in the series:
 
-1. **storageState concept** (Part 4) → Login state management
-2. **Fixtures** (Part 6) → Provide auth state + expected data as a set
-3. **Soft Assertions** (Part 5) → Verify multiple items at once
+1. **Fixtures** (Part 6) → Provide auth + expected data as a set
+2. **Soft Assertions** (Part 5) → Verify multiple items at once
 
 ```
 User Data (JSON)

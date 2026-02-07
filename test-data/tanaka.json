@@ -1,5 +1,9 @@
 {
   "username": "tanaka",
+  "login": {
+    "username": "user2",
+    "password": "User2@2025!"
+  },
   "profile": {
     "displayName": "田中一郎",
     "phone": "070-1111-2222",

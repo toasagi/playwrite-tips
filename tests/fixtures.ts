@@ -11,6 +11,10 @@ export type UserProfile = {
 
 export type UserData = {
   username: string;
+  login: {
+    username: string;
+    password: string;
+  };
   profile: UserProfile;
 };
 
@@ -40,8 +44,8 @@ async function loginAndSetupProfile(page: Page, userData: UserData): Promise<voi
 
   // 3. ダイアログ内でログイン情報を入力
   const loginDialog = page.getByRole('dialog', { name: 'ログイン' });
-  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill('demo');
-  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill('Demo@2025!');
+  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill(userData.login.username);
+  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill(userData.login.password);
 
   // 4. ダイアログ内のログインボタンをクリック（submitボタン）
   await loginDialog.getByRole('button', { name: 'ログイン' }).click();

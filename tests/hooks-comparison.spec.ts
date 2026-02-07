@@ -11,6 +11,10 @@ const BASE_URL = 'https://toasagi.github.io/shoptodo-app';
 // ユーザーデータの型定義
 type UserData = {
   username: string;
+  login: {
+    username: string;
+    password: string;
+  };
   profile: {
     displayName: string;
     phone: string;
@@ -37,8 +41,8 @@ async function loginAndSetupProfile(page: Page, userData: UserData): Promise<voi
   await page.locator('#login-btn').click();
 
   const loginDialog = page.getByRole('dialog', { name: 'ログイン' });
-  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill('demo');
-  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill('Demo@2025!');
+  await loginDialog.getByRole('textbox', { name: 'ユーザー名:' }).fill(userData.login.username);
+  await loginDialog.getByRole('textbox', { name: 'パスワード:' }).fill(userData.login.password);
   await loginDialog.getByRole('button', { name: 'ログイン' }).click();
 
   await loginDialog.waitFor({ state: 'hidden' });
