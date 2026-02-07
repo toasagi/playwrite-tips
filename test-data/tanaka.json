@@ -1,0 +1,8 @@
+{
+  "username": "tanaka",
+  "profile": {
+    "displayName": "田中一郎",
+    "phone": "070-1111-2222",
+    "paymentMethod": "cash_on_delivery"
+  }
+}
