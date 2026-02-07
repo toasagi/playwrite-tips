@@ -2,5 +2,9 @@
   "login": {
     "username": "user1",
     "password": "User1@2025!"
+  },
+  "cart": {
+    "products": ["Laptop", "Coffee Maker"],
+    "expectedTotal": "¥145,600"
   }
 }

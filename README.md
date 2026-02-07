@@ -27,9 +27,11 @@ Playwright (browser automation)
 | **Page Objects** | Selectors and UI logic in one place |
 | **Soft Assertions** | Verify multiple fields without stopping on first failure |
 
-## Test Scenario
+## Test Scenarios
 
-**Save and verify profile information for each user**
+### 1. User Profile Management
+
+Save and verify profile information for each user.
 
 | User | Name | Phone | Payment Method |
 |------|------|-------|----------------|
@@ -37,21 +39,34 @@ Playwright (browser automation)
 | sato | Hanako Sato | 080-9876-5432 | Bank Transfer |
 | tanaka | Ichiro Tanaka | 070-1111-2222 | Cash on Delivery |
 
+### 2. Shopping Cart Total Verification (Data-Driven)
+
+Add products to cart and verify the total amount. Product names and expected totals are managed in JSON files (`test-data/*.json`), not in the Feature file — the Feature only references the user key.
+
+| User | Products | Expected Total |
+|------|----------|----------------|
+| yamada | Smartphone, T-shirt, Programming Basics | ¥95,980 |
+| sato | Laptop, Coffee Maker | ¥145,600 |
+| tanaka | Jeans, Sneakers, Hat, Python Basics | ¥23,280 |
+
 ## File Structure
 
 ```
 playwrite-tips/
 ├── features/
-│   └── user-profile.feature      # Gherkin scenarios
+│   ├── user-profile.feature      # Profile management scenarios
+│   └── shopping-cart.feature     # Cart total verification scenarios
 ├── src/
 │   └── pages/
 │       ├── BasePage.ts            # Shared: switchToEnglish()
 │       ├── HomePage.ts            # Login trigger, navigation
 │       ├── LoginDialog.ts         # Username/password/submit
-│       └── ProfilePage.ts        # Name, phone, payment, save
+│       ├── ProfilePage.ts        # Name, phone, payment, save
+│       └── CartSection.ts        # Add products, verify total
 ├── steps/
 │   ├── fixtures.ts                # BDD fixtures providing page objects
-│   └── user-profile.steps.ts     # Given/When/Then implementations
+│   ├── user-profile.steps.ts     # Profile Given/When/Then
+│   └── shopping-cart.steps.ts    # Cart Given/When/Then
 ├── test-data/
 │   ├── yamada.json
 │   ├── sato.json

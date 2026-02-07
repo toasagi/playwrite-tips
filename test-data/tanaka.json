@@ -2,5 +2,9 @@
   "login": {
     "username": "user2",
     "password": "User2@2025!"
+  },
+  "cart": {
+    "products": ["Jeans", "Sneakers", "Hat", "Python Basics"],
+    "expectedTotal": "¥23,280"
   }
 }

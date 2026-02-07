@@ -2,5 +2,9 @@
   "login": {
     "username": "demo",
     "password": "Demo@2025!"
+  },
+  "cart": {
+    "products": ["Smartphone", "T-shirt", "Programming Basics"],
+    "expectedTotal": "¥95,980"
   }
 }
