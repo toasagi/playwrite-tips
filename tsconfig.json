@@ -9,5 +9,5 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["tests/**/*.ts"]
+  "include": ["steps/**/*.ts", "src/**/*.ts", ".features-gen/**/*.ts"]
 }
